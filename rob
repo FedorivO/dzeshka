@@ -1,0 +1,38 @@
+
+file = open("D:/dataset/dataset/athlete_events.csv")
+
+head = file.readline().strip().split(",")
+index_Sex = head.index('\"Sex\"')
+index_Name = head.index("\"Name\"")
+index_ID = head.index("\"ID\"")
+index_Heig = head.index("\"Height\"")
+index_Weig = head.index("\"Weight\"")
+print(index_Sex)
+#
+# def getID(line):
+#     result = re.split(r'"', line, maxsplit=2)
+#     return result[1],result[2]
+#
+# ID, tail = getID(head)
+#
+# name , tail = getID(tail)
+#
+# print(ID, name, tail)
+
+dataset = {}
+
+for line in file:
+    data = line.strip().split(",")
+    if data[index_Sex] not in dataset:
+        dataset[data[index_Sex]] = {}
+
+    if  data[index_Name] not in dataset[data[index_Sex]]:
+        dataset[data[index_Sex]][data[index_Name]] = { "ID":data[index_ID],
+                                                             "Height":data[index_Heig],
+                                                             "Weight":data[index_Weig]
+                                                             }
+
+
+
+print(dataset)
+
